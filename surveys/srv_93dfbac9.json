@@ -1,0 +1,19 @@
+{
+  "id": "srv_93dfbac9",
+  "title": "first title",
+  "description": "",
+  "questions": [
+    {
+      "id": "q_48d5903e",
+      "type": "yesno",
+      "text": "Do you like surveys?",
+      "options": []
+    },
+    {
+      "id": "q_62111e09",
+      "type": "text",
+      "text": "What was your summer vacation.",
+      "options": []
+    }
+  ]
+}
