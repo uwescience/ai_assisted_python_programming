@@ -6,11 +6,12 @@ from src.models import Question, Survey
 
 
 def taker_layout() -> html.Div:
-    return html.Div([
+    result = html.Div([
         html.H3("Take a survey"),
         dcc.Dropdown(id=cn.TAKER_SURVEY_SELECT, placeholder="Choose a survey..."),
         html.Div(id=cn.TAKER_FORM, style={"marginTop": "16px"}),
     ], style={"maxWidth": "700px", "margin": "0 auto"})
+    return result
 
 
 def _answer_input(question: Question):
@@ -34,7 +35,8 @@ def render_survey_form(survey: Survey) -> html.Div:
         html.H4(survey.title),
         html.P(survey.description),
         html.Label("Your ID (5 digits): "),
-        dcc.Input(id=cn.TAKER_RESPONDENT_ID, type="text", maxLength=5, placeholder="5 digits"),
+        dcc.Input(id=cn.TAKER_RESPONDENT_ID, type="text", maxLength=5,
+                placeholder="5 digits"),
         html.Div(questions),
         html.Button("Submit", id=cn.TAKER_SUBMIT, n_clicks=0, style={"marginTop": "16px"}),
         html.Div(id=cn.TAKER_STATUS, style={"marginTop": "12px"}),

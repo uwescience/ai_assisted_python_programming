@@ -64,9 +64,11 @@ This document provides brief descriptions of the content of episodes (a teaching
       5. Review tests
 
 6. Assists for large feature: Part 1
-   1. Scope: Requires at least one module
-   2. Example: drafts (save, resume, delete a partly completed response); alternative: an "Add question" button and editing an existing survey
+   1. Scope: Add a hover for Survey Analyzer that summarizes the responses
+   2. Example: Show what a hover looks like
    3. Write specification
+      1. What's required for a hover: (a) ID for "tipped" widget; (b) tooltip widget
+      2. Processing to create summary statistics
    4. Review for: completeness, ambiguities, consistency
 
 7. Assists for large features: Part 2

@@ -5,6 +5,7 @@ Run it from the teaching/ folder with:  python -m src.app
 from datetime import datetime
 
 from dash import ALL, Dash, Input, Output, State, callback, dcc, html, no_update
+import dash_bootstrap_components as dbc  # type: ignore
 
 import src.constants as cn
 from src.form_logic import assemble_questions_from_state, build_response_answers, is_valid_respondent_id  # type: ignore
@@ -18,15 +19,20 @@ WARNING = {"color": "darkorange"}
 SUCCESS = {"color": "green"}
 SURVEY_GONE = "⚠️ This survey no longer exists."
 
-app = Dash(__name__, suppress_callback_exceptions=True, title="Survey Manager (teaching)")
+app = Dash(__name__, suppress_callback_exceptions=True,
+        #E6#external_stylesheets=[dbc.themes.BOOTSTRAP],
+        title="Survey Manager (teaching)")
 
 app.layout = html.Div([
     html.H1("Survey Manager", style={"textAlign": "center"}),
     dcc.Tabs(id=cn.MAIN_TABS, value="maker", children=[
         dcc.Tab(label="Survey Maker", value="maker", children=maker_layout()),
-        dcc.Tab(label="Survey Taker", value="taker", children=taker_layout()),
+        dcc.Tab(label="Survey Taker", value="taker", children=taker_layout(),
+                id="taker-tab"),
         dcc.Tab(label="Survey Analyzer", value="analyzer", children=analyzer_layout()),
     ]),
+    #E6#dbc.Tooltip("Monthly revenue and order trends",
+    #E6#            target="taker-tab", placement="bottom"),
 ])
 
 
@@ -58,12 +64,12 @@ def save_survey_callback(n_clicks, title, description, types, texts, options_tex
 
 # 2. Every tab switch: refresh the survey dropdowns on the Taker and Analyzer tabs.
 @callback(
-    Output(cn.TAKER_SURVEY_SELECT, "options"),
     Output(cn.ANALYZER_SURVEY_SELECT, "options"),
     Input(cn.MAIN_TABS, "value"),
 )
 def refresh_survey_lists(tab):
     options = [{"label": s["title"], "value": s["id"]} for s in list_surveys()]
+    import pdb; pdb.set_trace()
     return options, options
 
 
